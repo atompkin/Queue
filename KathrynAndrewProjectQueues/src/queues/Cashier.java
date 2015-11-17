@@ -53,7 +53,7 @@ public class Cashier implements Runnable
     {
         String message;
         
-        while(/*Is there someone in the queue*/)
+        while(true)
         {
             try
             {
