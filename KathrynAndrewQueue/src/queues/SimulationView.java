@@ -29,8 +29,13 @@ public class SimulationView extends JFrame
 	private JLabel myIdleTime;
 	private JLabel myWaitTime;
 	private JLabel myCashierStats;
+	private JLabel myCashierNum;
+	private JLabel myCashierServed;
+	private JLabel myCashierServeTime;
+	private JLabel myCashierIdle;
 	private JButton mySuspend;
 	private ButtonListener mySuspendListener;
+	private ButtonListener[][] myLinesListener;
 	
 	/**
 	 * Constructor
@@ -75,6 +80,7 @@ public class SimulationView extends JFrame
 			{
 				myLines[i][j] = new JLabel();
 				myLines[i][j].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.black));
+				myLines[i][j].addMouseListener(myLinesListener[i][j]);
 				myPanel2.add(myLines[i][j]);
 			}
 		}
@@ -105,6 +111,14 @@ public class SimulationView extends JFrame
 		
 		myCashierStats = new JLabel("Individual Cashier Stats");
 		myCashierStats.setFont(new Font("TimesRoman", Font.BOLD, 20));
+		myCashierNum = new JLabel(" ");
+		myCashierNum.setFont(new Font("TimesRoman", Font.BOLD, 20));
+		myCashierServed = new JLabel("");
+		myCashierServed.setFont(new Font("TimesRoman", Font.BOLD, 20));
+		myCashierServeTime = new JLabel("");
+		myCashierServeTime.setFont(new Font("TimesRoman", Font.BOLD, 20));
+		myCashierIdle = new JLabel("");
+		myCashierIdle.setFont(new Font("TimesRoman", Font.BOLD, 20));
 		
 		myPanel.add(myPanel3);
 		myPanel.add(myPanel5);
@@ -115,6 +129,10 @@ public class SimulationView extends JFrame
 		myPanel3.add(myWaitTime);
 		myPanel3.add(myIdleTime);
 		myPanel5.add(myCashierStats);
+		myPanel5.add(myCashierNum);
+		myPanel5.add(myCashierServed);
+		myPanel5.add(myCashierServeTime);
+		myPanel5.add(myCashierIdle);
 		myPanel4.add(mySuspend);
 		getContentPane().add(myPanel);
 		getContentPane().add(myPanel2);
@@ -130,16 +148,29 @@ public class SimulationView extends JFrame
 	private void associateListeners(SimulationController controller) 
 	{
 		Class<? extends SimulationController> controllerClass;
-        Method suspend;
+        Method cashierStats,suspend;
         Class<?>[] classArgs;
                
         controllerClass = controller.getClass();
-        classArgs = null;
+        classArgs = new Class[1];
         suspend = null;
+        cashierStats = null;
+        
+        try
+        {
+           classArgs[0] = Class.forName("java.lang.Integer");
+        }
+        catch(ClassNotFoundException e)
+        {
+           String error;
+           error = e.toString();
+           System.out.println(error);
+        }
         
         try
         {
         	suspend = controllerClass.getMethod("suspend", (Class<?>[])null);
+        	cashierStats = controllerClass.getMethod("cashierStats", classArgs);
         }
         catch(NoSuchMethodException exception)
         {
@@ -154,6 +185,40 @@ public class SimulationView extends JFrame
            System.out.println(error);
         }
         
+        Integer[] args;
+        myLinesListener = new ButtonListener[10][5];
+
+        for (int i = 0; i < 10; i++)
+        {
+        	for(int j = 0; j < 5; j++)
+        	{
+        		args = new Integer[1];
+                args[0] = new Integer(j);
+                myLinesListener[i][j] = new ButtonListener(controller, cashierStats, args);
+        	}
+        }
+        
         mySuspendListener = new ButtonListener(controller, suspend);
+	}
+	public void setWaitTime(int i)
+	{
+		myWaitTime.setText("Total Wait Time: " + i);
+	}
+	public void setIdleTime(int i)
+	{
+		myIdleTime.setText("Total Idle Time: " + i);
+	}
+	
+	public void setServiceTime(int i)
+	{
+		myServiceTime.setText("Total Service Time: " + i);
+	}
+	
+	public void setCashier(int cashier,int served,int serviceTime,int idleTime)
+	{
+		myCashierNum.setText("Cashier "+ cashier);
+		myCashierServed.setText("Total Served "+ served);
+		myCashierServeTime.setText("Average Service time  "+ serviceTime);
+		myCashierIdle.setText("Average Idle Time "+ idleTime);
 	}
 }

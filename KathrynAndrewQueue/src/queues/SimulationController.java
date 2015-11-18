@@ -28,6 +28,10 @@ public class SimulationController
 		
 	}
 	
+	public void cashierStats(Integer i)
+	{
+		System.out.println(i);
+	}
 	
 	public int QueSize(int i)
 	{
