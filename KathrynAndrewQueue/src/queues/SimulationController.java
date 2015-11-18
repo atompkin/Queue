@@ -24,7 +24,7 @@
  	public SimulationController()
  	{
  		myView = new SimulationView(this);
- 		myModel = new ServiceQueueManager(2, 100, 100, 50);
+ 		myModel = new ServiceQueueManager(2, 20, 200, 500);
  	}
  	
 	public void cashierStats(Integer i)

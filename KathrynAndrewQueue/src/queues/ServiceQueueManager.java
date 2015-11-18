@@ -18,21 +18,25 @@ public class ServiceQueueManager
 	private int myTotalServiceTime;
 	private int myTotalIdleTime;
 	private CustomerGenerator myCustomerGenerator;
-	private Cashier myCashier;
+	private Cashier[] myCashiers;
 	
 	public ServiceQueueManager(int numberOfQueues, int maxTimeBetweenCustomers, int maxServiceTime, int numberOfCustomers)
 	{
 		myNumberOfServiceQueues = numberOfQueues;
 		myServiceQueues = new ServiceQueue[myNumberOfServiceQueues];
+		myCashiers = new UniformCashier[myNumberOfServiceQueues];
 		for(int i = 0; i < myNumberOfServiceQueues; i++)
 		{
 			myServiceQueues[i] = new ServiceQueue();
+			myCashiers[i] = new UniformCashier(maxServiceTime, myServiceQueues[i]);
 		}
 		myTotalWaitTime = 0;
 		myTotalServiceTime = 0;
 		myTotalIdleTime = 0;
 		myCustomerGenerator = new UniformCustomerGenerator(maxTimeBetweenCustomers, numberOfCustomers, this);
+		
 		myCustomerGenerator.start();
+		
 	}
 	
 	public int totalServedSoFar()
