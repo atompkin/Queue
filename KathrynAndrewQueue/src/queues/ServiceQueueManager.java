@@ -113,4 +113,26 @@ public class ServiceQueueManager
 	{
 		return myServiceQueues;
 	}
+	
+	public int getNumberOfServiceQueues()
+	{
+		return myNumberOfServiceQueues;
+	}
+	
+	public boolean isThreadDone()
+	{
+		int counter = 0;
+		for(int i = 0; i < myNumberOfServiceQueues; i++)
+		{
+			if(myServiceQueues[i].empty())
+			{
+				counter++;
+			}
+		}
+		if(counter == myNumberOfServiceQueues)
+		{
+			return true;
+		}
+		return false;
+	}
 }

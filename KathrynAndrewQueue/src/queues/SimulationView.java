@@ -29,7 +29,7 @@
  	private JLabel myIdleTime;
  	private JLabel myWaitTime;
  	private JLabel myCashierStats;
-	private JLabel myCashierNum;
+	private JLabel myCashierWait;
 	private JLabel myCashierServed;
 	private JLabel myCashierServeTime;
 	private JLabel myCashierIdle;
@@ -111,14 +111,14 @@
  		
  		myCashierStats = new JLabel("Individual Cashier Stats");
  		myCashierStats.setFont(new Font("TimesRoman", Font.BOLD, 20));
-		myCashierNum = new JLabel(" ");
-		myCashierNum.setFont(new Font("TimesRoman", Font.BOLD, 20));
+		myCashierWait = new JLabel("");
+		myCashierWait.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		myCashierServed = new JLabel("");
-		myCashierServed.setFont(new Font("TimesRoman", Font.BOLD, 20));
+		myCashierServed.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		myCashierServeTime = new JLabel("");
-		myCashierServeTime.setFont(new Font("TimesRoman", Font.BOLD, 20));
+		myCashierServeTime.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		myCashierIdle = new JLabel("");
-		myCashierIdle.setFont(new Font("TimesRoman", Font.BOLD, 20));
+		myCashierIdle.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		
 		myPanel.add(myPanel3);
 		myPanel.add(myPanel5);
@@ -129,9 +129,9 @@
 		myPanel3.add(myWaitTime);
 		myPanel3.add(myIdleTime);
 		myPanel5.add(myCashierStats);
-		myPanel5.add(myCashierNum);
 		myPanel5.add(myCashierServed);
 		myPanel5.add(myCashierServeTime);
+		myPanel5.add(myCashierWait);
 		myPanel5.add(myCashierIdle);
 		myPanel4.add(mySuspend);
 		getContentPane().add(myPanel);
@@ -169,7 +169,7 @@
          
         try
         {
-        	suspend = controllerClass.getMethod("suspend", (Class<?>[])null);
+        	suspend = controllerClass.getMethod("startAndPause", (Class<?>[])null);
         	cashierStats = controllerClass.getMethod("cashierStats", classArgs);
         }
         catch(NoSuchMethodException exception)
@@ -200,25 +200,32 @@
         
         mySuspendListener = new ButtonListener(controller, suspend);
  	}
+	
 	public void setWaitTime(int i)
 	{
 		myWaitTime.setText("Total Wait Time: " + i);
+		myWaitTime.repaint();
 	}
+	
 	public void setIdleTime(int i)
 	{
 		myIdleTime.setText("Total Idle Time: " + i);
+		myIdleTime.repaint();
 	}
 	
 	public void setServiceTime(int i)
 	{
 		myServiceTime.setText("Total Service Time: " + i);
+		myServiceTime.repaint();
 	}
 	
-	public void setCashier(int cashier,int served,int serviceTime,int idleTime)
+	public void setCashier(int cashier,int served,int serviceTime,int idleTime, int waitTime)
 	{
-		myCashierNum.setText("Cashier "+ cashier);
-		myCashierServed.setText("Total Served "+ served);
-		myCashierServeTime.setText("Average Service time  "+ serviceTime);
-		myCashierIdle.setText("Average Idle Time "+ idleTime);
+		myCashierStats.setText("Individual Cashier "+ (cashier + 1) + " Stats");
+		myCashierServed.setText("Total Served: "+ served);
+		myCashierServeTime.setText("Average Service Time:  "+ serviceTime);
+		myCashierWait.setText("Average Wait Time: " + waitTime);
+		myCashierIdle.setText("Average Idle Time: "+ idleTime);
 	}
+	
 }

@@ -75,6 +75,7 @@ public class ServiceQueue extends Queue<Customer>
 	 */
 	public Customer serveCustomer()
 	{
+		myNumberCustomersServed++;
 		System.out.println("Number Left: " + myNumberCustomersInLine--);
 		return this.dequeue();
 	}
