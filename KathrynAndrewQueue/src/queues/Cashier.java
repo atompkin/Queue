@@ -11,12 +11,19 @@ package queues;
 
 public abstract class Cashier implements Runnable
 {
+	/**
+	 * Properties
+	 */
 	private int myMaxTimeOfService;
 	private ServiceQueue myServiceQueue;
 	private Thread myThread;
     private boolean mySuspended;
 	
-    
+    /**
+     * Constructor, which instantiates all of the properties
+     * @param maxServiceTime : The max service time for the cashiers
+     * @param serviceQueue : The service queue the cashier is working with
+     */
 	public Cashier(int maxServiceTime, ServiceQueue serviceQueue)
 	{
 		myMaxTimeOfService = maxServiceTime;
@@ -25,13 +32,24 @@ public abstract class Cashier implements Runnable
         myThread = new Thread(this);
 	}
 	
+	/**
+	 * Removes of one customer in the queue
+	 * @return : The customer off the queue
+	 */
 	public Customer serveCustomer()
 	{
 		return myServiceQueue.serveCustomer();
 	}
 	
+	/**
+	 * Generates the service time for the cashiers 
+	 * @return : The service time
+	 */
 	public abstract int generateServiceTime();
 	
+	/**
+	 * What happens when the thread starts
+	 */
 	public void run() 
 	{
 		try
@@ -47,18 +65,21 @@ public abstract class Cashier implements Runnable
     	}
 	}
 	
+	/**
+	 * Serving the customer inside the thread
+	 * @throws InterruptedException
+	 */
 	private void doSomething() throws InterruptedException
     {
         String message;
         
         while(true)
         {
-        	System.out.println(myServiceQueue.empty());
         	if(!myServiceQueue.empty())
         	{
         		try
                 {
-        			System.out.println("Generated");
+        			serveCustomer();
                     Thread.sleep(generateServiceTime());
                 }
                 catch(InterruptedException e)
@@ -82,6 +103,10 @@ public abstract class Cashier implements Runnable
         }
     }
 
+	/**
+	 * When the thread stops, it calls wait on the thread
+	 * @throws InterruptedException
+	 */
 	private void waitWhileSuspended() throws InterruptedException
     {
     	while (mySuspended)
@@ -90,11 +115,17 @@ public abstract class Cashier implements Runnable
     	}
     }
 	
+	/**
+	 * Used to suspend the thread
+	 */
 	public void suspend()
 	{
 		mySuspended = true;
 	}
 	
+	/**
+	 * Starting the thread
+	 */
 	public void start()
 	{
 		try
@@ -107,17 +138,19 @@ public abstract class Cashier implements Runnable
         }
 	}
 	
+	/**
+	 * Starting the thread back up after being paused
+	 */
 	public synchronized void resume()
     {
     	mySuspended = false;
     	notify();
     }
-
-	public void setMyMaxTimeOfService(int maxServiceTime) 
-	{
-		myMaxTimeOfService = maxServiceTime;
-	}
 	
+	/**
+	 * Getting the max service time
+	 * @return : the max service time
+	 */
 	public int getMyMaxTimeOfService() 
 	{
 		return myMaxTimeOfService;

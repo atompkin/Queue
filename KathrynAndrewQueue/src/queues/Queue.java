@@ -4,8 +4,7 @@
  * 11/20/15
  * CSCI142
  * 
- * Description: Queue based of a single link list. the Que adds to the end
- * of the linked list and takes from the beginning.
+ * Description: 
  * 
  */
 package queues;
@@ -14,17 +13,22 @@ import java.util.LinkedList;
 
 public class Queue<T>
 {
+	/**
+	 * Properties
+	 */
 	private LinkedList<T> myData;
 	
 	/**
-	 * Creates the link list that is used as the structure for the queue
+	 * Constructor
 	 */
 	public Queue()
 	{
 		myData = new LinkedList<T>();
 	}
+
 	/**
-	 * @return if the linked list is empty
+	 * Checking to see if the queue is empty
+	 * @return
 	 */
 	public boolean empty()
 	{
@@ -32,32 +36,33 @@ public class Queue<T>
 	}
 	
 	/**
-	 * adds to the end of the linked list
-	 * @param o
+	 * Inserting data into the queue
+	 * @param o : the data
 	 */
 	public void enqueue(T o)
 	{
 		myData.addLast(o);
 	}
+	
 	/**
-	 * @return looks at the next thing in the list
-	 */
-	public T peek()
-	{
-		return myData.peekFirst();
-	}
-	/**
-	 * @return returns the last thing on the link list
+	 * Removing data from the queue
+	 * @return : the data that was removed
 	 */
 	public T dequeue()
 	{
-		if (myData.isEmpty())
+		if(myData.isEmpty())
 		{
 			return null;
 		}
 		return myData.removeFirst();
 	}
 	
-	
+	/**
+	 * Seeing what is in the front of the queue
+	 * @return : the front of the queue
+	 */
+	public T peek()
+	{
+		return myData.peekFirst();
+	}
 }
-
