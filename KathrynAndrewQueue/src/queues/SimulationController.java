@@ -45,7 +45,7 @@
  	{
  		if(myModel == null)
  		{
- 			myModel = new ServiceQueueManager(3, 20, 200, 5);
+ 			myModel = new ServiceQueueManager(3, 20, 200, 500);
  			this.start();
  		}
  		else if(isSuspended())
@@ -67,7 +67,7 @@
     	{
     		synchronized(this)
     		{
-    			this.doSomething();
+    			this.doInsertPictures();
     		}
     	}
     	catch (InterruptedException e)
@@ -79,7 +79,7 @@
 	 * Inserting the customer into the queue
 	 * @throws InterruptedException
 	 */
-	private void doSomething() throws InterruptedException
+	private void doInsertPictures() throws InterruptedException
     {
         String message;
         
@@ -87,7 +87,13 @@
         {
             this.waitWhileSuspended();
         	
-            //inserting pictures 
+            if(myModel != null)
+            {
+            	for(int i = 0; i < myModel.getNumberOfServiceQueues(); i++)
+            	{
+            		myView.setLines(i, myModel.getServiceQueue()[i].getMyNumberCustomersInLine());
+            	}
+            }
             
             try
             {

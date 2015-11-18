@@ -36,6 +36,7 @@
  	private JButton mySuspend;
  	private ButtonListener mySuspendListener;
 	private ButtonListener[][] myLinesListener;
+	private ImageIcon myPicture;
  	
  	/**
  	 * Constructor
@@ -49,6 +50,8 @@
  		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  		this.associateListeners(controller);
  		getContentPane().setBackground(Color.white);
+ 		
+ 		myPicture = new ImageIcon("src/mages/Queen1.jpg");
  		
  		myPanel = new JPanel(new GridLayout(3,1));
  		myPanel.setSize(285,560);
@@ -84,7 +87,7 @@
  				myPanel2.add(myLines[i][j]);
  			}
  		}
- 		
+ 	
  		for(int i = 0; i < 5; i++)
  		{
  			myLines[9][i].setText("Served: ");
@@ -226,6 +229,14 @@
 		myCashierServeTime.setText("Average Service Time:  "+ serviceTime);
 		myCashierWait.setText("Average Wait Time: " + waitTime);
 		myCashierIdle.setText("Average Idle Time: "+ idleTime);
+	}
+	
+	public void setLines(int l, int size)
+	{
+		for(int i = 0; i < size; i++)
+		{
+			myLines[i][l].setIcon(myPicture);
+		}
 	}
 	
 }
