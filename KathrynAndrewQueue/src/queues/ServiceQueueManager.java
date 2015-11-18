@@ -29,6 +29,7 @@ public class ServiceQueueManager
 		{
 			myServiceQueues[i] = new ServiceQueue();
 			myCashiers[i] = new UniformCashier(maxServiceTime, myServiceQueues[i]);
+			myCashiers[i].start();
 		}
 		myTotalWaitTime = 0;
 		myTotalServiceTime = 0;
@@ -83,7 +84,7 @@ public class ServiceQueueManager
 		for(int i = 1; i < myNumberOfServiceQueues; i++)
 		{
 			int compare2 = myServiceQueues[i].getMyNumberCustomersInLine();
-			if(compare < compare2)
+			if(compare > compare2)
 			{
 				shortestQueue = i;
 				compare = compare2;

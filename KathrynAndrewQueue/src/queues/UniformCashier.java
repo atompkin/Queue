@@ -21,7 +21,6 @@ public class UniformCashier extends Cashier
 		super(maxServiceTime, serviceQueue);
 		myMaxServiceTime = maxServiceTime;
 		myRandom = new Random();
-		this.start();
 	}
 	
 	public int generateServiceTime()

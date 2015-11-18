@@ -90,7 +90,6 @@ public abstract class CustomerGenerator implements Runnable
             myServiceQueueManager.determineShortestQueue().insertCustomer(generateCustomer());
             try
             {
-            	System.out.println(myNumberCustomer);
                 Thread.sleep(generateTimeBetweenCustomers());
             }
             catch(InterruptedException e)
