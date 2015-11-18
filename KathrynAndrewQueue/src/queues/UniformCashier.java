@@ -18,7 +18,7 @@ public class UniformCashier extends Cashier
 	
 	public UniformCashier(int maxServiceTime, ServiceQueue serviceQueue) 
 	{
-		super(maxServiceTime,serviceQueue);
+		super(maxServiceTime, serviceQueue);
 		myMaxServiceTime = maxServiceTime;
 		myRandom = new Random();
 		this.start();

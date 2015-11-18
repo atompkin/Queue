@@ -18,21 +18,20 @@ public class ServiceQueueManager
 	private int myTotalServiceTime;
 	private int myTotalIdleTime;
 	private CustomerGenerator myCustomerGenerator;
+	private Cashier myCashier;
 	
-	public ServiceQueueManager(int numberOfQueues)
+	public ServiceQueueManager(int numberOfQueues, int maxTimeBetweenCustomers, int maxServiceTime, int numberOfCustomers)
 	{
 		myNumberOfServiceQueues = numberOfQueues;
 		myServiceQueues = new ServiceQueue[myNumberOfServiceQueues];
-		
 		for(int i = 0; i < myNumberOfServiceQueues; i++)
 		{
 			myServiceQueues[i] = new ServiceQueue();
 		}
-			
 		myTotalWaitTime = 0;
 		myTotalServiceTime = 0;
 		myTotalIdleTime = 0;
-		myCustomerGenerator = new UniformCustomerGenerator(100, 50, this);
+		myCustomerGenerator = new UniformCustomerGenerator(maxTimeBetweenCustomers, numberOfCustomers, this);
 		myCustomerGenerator.start();
 	}
 	
@@ -86,6 +85,7 @@ public class ServiceQueueManager
 				compare = compare2;
 			}
 		}
+		System.out.println(shortestQueue);
 		return myServiceQueues[shortestQueue];
 	}
 	

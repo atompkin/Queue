@@ -13,23 +13,41 @@ import java.util.LinkedList;
 
 public class Queue<T>
 {
+	/**
+	 * Properties
+	 */
 	private LinkedList<T> myData;
 	
+	/**
+	 * Constructor
+	 */
 	public Queue()
 	{
 		myData = new LinkedList<T>();
 	}
 
+	/**
+	 * Checking to see if the queue is empty
+	 * @return
+	 */
 	public boolean empty()
 	{
 		return myData.isEmpty();
 	}
 	
+	/**
+	 * Inserting data into the queue
+	 * @param o : the data
+	 */
 	public void enqueue(T o)
 	{
 		myData.addLast(o);
 	}
 	
+	/**
+	 * Removing data from the queue
+	 * @return : the data that was removed
+	 */
 	public T dequeue()
 	{
 		if(myData.isEmpty())
@@ -39,6 +57,10 @@ public class Queue<T>
 		return myData.removeFirst();
 	}
 	
+	/**
+	 * Seeing what is in the front of the queue
+	 * @return : the front of the queue
+	 */
 	public T peek()
 	{
 		return myData.peekFirst();

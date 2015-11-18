@@ -23,8 +23,7 @@ public class SimulationController
 	public SimulationController()
 	{
 		myView = new SimulationView(this);
-		myModel = new ServiceQueueManager(2);
-		System.out.println("Stuff: " + myModel.determineShortestQueue());
+		myModel = new ServiceQueueManager(2, 20, 200, 500);
 	}
 	
 	public void suspend()

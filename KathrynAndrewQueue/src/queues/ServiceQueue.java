@@ -11,46 +11,78 @@ package queues;
 
 public class ServiceQueue extends Queue<Customer>
 {
+	/**
+	 * Properties
+	 */
 	private int myNumberCustomersServed;
 	private int myNumberCustomersInLine;
 	private int myTotalWaitTime;
 	private int myTotalServiceTime;
 	private int myTotalIdleTime;
 	
+	/**
+	 * Constructor, instantiates the properties
+	 */
 	public ServiceQueue()
 	{
 		myNumberCustomersServed = 0;
 		myNumberCustomersInLine = 0;
 		myTotalWaitTime = 0;
 		myTotalServiceTime = 0;
-		myTotalIdleTime = 0;
+		myTotalIdleTime = 0; 
 	}
 	
+	/**
+	 * Adds to idle time
+	 * @param idle : time to add to idle
+	 */
 	public void addToIdleTime(int idle)
 	{
 		myTotalIdleTime = myTotalIdleTime + idle;
 	}
 	
+	/**
+	 * Add to wait time
+	 * @param wait : time to add to wait
+	 */
 	public void addToWaitTime(int wait)
 	{
 		myTotalWaitTime = myTotalWaitTime + wait;
 	}
 	
+	/**
+	 * Add to service time
+	 * @param service : time to add to service time
+	 */
 	public void addToServiceTime(int service)
 	{
 		myTotalServiceTime = myTotalServiceTime + service;
 	}
 	
+	/**
+	 * Inserting a customer into the queue
+	 * @param customer : the customer to insert
+	 */
 	public void insertCustomer(Customer customer)
 	{
 		this.enqueue(customer);
+		System.out.println(this.toString());
 	}
 	
+	/**
+	 * Removing a customer in the queue
+	 * @return : the customer that was removed
+	 */
 	public Customer serveCustomer()
 	{
+		System.out.println(this.toString());
 		return this.dequeue();
 	}
 	
+	/**
+	 * The average wait time
+	 * @return
+	 */
 	public int averageWaitTime()
 	{
 		return getMyTotalWaitTime()/myNumberCustomersServed;
