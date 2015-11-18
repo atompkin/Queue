@@ -103,4 +103,9 @@ public class ServiceQueueManager
 	{
 		return totalIdleTime()/totalServedSoFar();
 	}
+	
+	public ServiceQueue[] getServiceQueue()
+	{
+		return myServiceQueues;
+	}
 }
