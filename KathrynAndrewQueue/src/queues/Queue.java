@@ -58,10 +58,6 @@ public class Queue<T>
 		return myData.removeFirst();
 	}
 	
-	public int size()
-	{
-		return myData.size();
-	}
 	
 }
 

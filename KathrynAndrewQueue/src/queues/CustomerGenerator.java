@@ -38,6 +38,9 @@ public abstract class CustomerGenerator implements Runnable
 		return myCustomer;
 	}
 	
+	/**
+	 * this function calls upon doSomething
+	 */
 	public void run() 
 	{
 		try
@@ -52,6 +55,7 @@ public abstract class CustomerGenerator implements Runnable
     		System.out.println("Thread suspended.");
     	}
 	}
+
 	
 	private void doSomething() throws InterruptedException
     {

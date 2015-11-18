@@ -28,10 +28,17 @@ public class SimulationController
 		
 	}
 	
-	public ServiceQueue[] getQueues()
+	
+	public int QueSize(int i)
 	{
-		return myModel.getServiceQueue();
+		return myModel.getServiceQueue()[i].getMyNumberCustomersInLine();
 	}
+	
+	public int QueServed(int i)
+	{
+		return myModel.getServiceQueue()[i].getMyNumberCustomersServed();
+	}
+	
 	
 	public void suspend()
 	{
@@ -84,4 +91,6 @@ public class SimulationController
 	{
 		return myModel.averageWaitTime();
 	}
+	
+	
 }
