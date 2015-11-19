@@ -51,7 +51,7 @@
  		this.associateListeners(controller);
  		getContentPane().setBackground(Color.white);
  		
- 		myPicture = new ImageIcon("src/mages/Queen1.jpg");
+ 		myPicture = new ImageIcon("src/images/Queen1.jpg");
  		
  		myPanel = new JPanel(new GridLayout(3,1));
  		myPanel.setSize(285,560);
@@ -231,11 +231,116 @@
 		myCashierIdle.setText("Average Idle Time: "+ idleTime);
 	}
 	
+	public void setServed(int l, int served)
+	{
+		myLines[9][l].setText("Served: " + served);
+		myLines[9][l].repaint();
+	}
+	
 	public void setLines(int l, int size)
 	{
-		for(int i = 0; i < size; i++)
+		if(size < 9)
 		{
-			myLines[i][l].setIcon(myPicture);
+			myLines[0][l].setText("Overflow: 0");
+			myLines[0][l].repaint();
+		}
+		else
+		{
+			myLines[0][l].setText("Overflow: " + (size - 8));
+			myLines[0][l].repaint();
+		}
+		switch(size)
+		{
+			case 0: myLines[8][l].setIcon(null);
+					myLines[7][l].setIcon(null);
+					myLines[6][l].setIcon(null);
+					myLines[5][l].setIcon(null);
+					myLines[4][l].setIcon(null);
+					myLines[3][l].setIcon(null);
+					myLines[2][l].setIcon(null);
+					myLines[1][l].setIcon(null);
+					break;
+			case 1: myLines[8][l].setIcon(myPicture);
+					myLines[7][l].setIcon(null);
+					myLines[6][l].setIcon(null);
+					myLines[5][l].setIcon(null);
+					myLines[4][l].setIcon(null);
+					myLines[3][l].setIcon(null);
+					myLines[2][l].setIcon(null);
+					myLines[1][l].setIcon(null);
+					break;
+			case 2: myLines[8][l].setIcon(myPicture);
+					myLines[7][l].setIcon(myPicture);
+					myLines[6][l].setIcon(null);
+					myLines[5][l].setIcon(null);
+					myLines[4][l].setIcon(null);
+					myLines[3][l].setIcon(null);
+					myLines[2][l].setIcon(null);
+					myLines[1][l].setIcon(null);
+					break;
+			case 3: myLines[8][l].setIcon(myPicture);
+					myLines[7][l].setIcon(myPicture);
+					myLines[6][l].setIcon(myPicture);
+					myLines[5][l].setIcon(null);
+					myLines[4][l].setIcon(null);
+					myLines[3][l].setIcon(null);
+					myLines[2][l].setIcon(null);
+					myLines[1][l].setIcon(null);
+					break;
+			case 4: myLines[8][l].setIcon(myPicture);
+					myLines[7][l].setIcon(myPicture);
+					myLines[6][l].setIcon(myPicture);
+					myLines[5][l].setIcon(myPicture);
+					myLines[4][l].setIcon(null);
+					myLines[3][l].setIcon(null);
+					myLines[2][l].setIcon(null);
+					myLines[1][l].setIcon(null);
+					break;
+			case 5: myLines[8][l].setIcon(myPicture);
+					myLines[7][l].setIcon(myPicture);
+					myLines[6][l].setIcon(myPicture);
+					myLines[5][l].setIcon(myPicture);
+					myLines[4][l].setIcon(myPicture);
+					myLines[3][l].setIcon(null);
+					myLines[2][l].setIcon(null);
+					myLines[1][l].setIcon(null);
+					break;
+			case 6: myLines[8][l].setIcon(myPicture);
+					myLines[7][l].setIcon(myPicture);
+					myLines[6][l].setIcon(myPicture);
+					myLines[5][l].setIcon(myPicture);
+					myLines[4][l].setIcon(myPicture);
+					myLines[3][l].setIcon(myPicture);
+					myLines[2][l].setIcon(null);
+					myLines[1][l].setIcon(null);
+					break;	
+			case 7: myLines[8][l].setIcon(myPicture);
+					myLines[7][l].setIcon(myPicture);
+					myLines[6][l].setIcon(myPicture);
+					myLines[5][l].setIcon(myPicture);
+					myLines[4][l].setIcon(myPicture);
+					myLines[3][l].setIcon(myPicture);
+					myLines[2][l].setIcon(myPicture);
+					myLines[1][l].setIcon(null);
+					break;
+			case 8: myLines[8][l].setIcon(myPicture);
+					myLines[7][l].setIcon(myPicture);
+					myLines[6][l].setIcon(myPicture);
+					myLines[5][l].setIcon(myPicture);
+					myLines[4][l].setIcon(myPicture);
+					myLines[3][l].setIcon(myPicture);
+					myLines[2][l].setIcon(myPicture);
+					myLines[1][l].setIcon(myPicture);
+					break;	
+			default: myLines[8][l].setIcon(myPicture);
+					myLines[7][l].setIcon(myPicture);
+					myLines[6][l].setIcon(myPicture);
+					myLines[5][l].setIcon(myPicture);
+					myLines[4][l].setIcon(myPicture);
+					myLines[3][l].setIcon(myPicture);
+					myLines[2][l].setIcon(myPicture);
+					myLines[1][l].setIcon(myPicture);
+					break;
 		}
 	}
 	

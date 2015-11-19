@@ -80,7 +80,6 @@ public abstract class Cashier implements Runnable
         		try
                 {
         			serveCustomer();
-        			System.out.println("Served");
                     Thread.sleep(generateServiceTime());
                 }
                 catch(InterruptedException e)

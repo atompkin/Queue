@@ -36,6 +36,7 @@
 		myView.setIdleTime(myModel.totalIdleTime());
 		myView.setServiceTime(myModel.totalServiceTime());
  	}
+ 	
 	public void cashierStats(Integer i)
 	{
 		if(myModel.getNumberOfServiceQueues() > i)
@@ -51,7 +52,7 @@
  	{
  		if(myModel == null)
  		{
- 			myModel = new ServiceQueueManager(3, 20, 200, 500);
+ 			myModel = new ServiceQueueManager(3, 20, 200, 50);
  			this.start();
  		}
  		else if(isSuspended())
@@ -94,8 +95,12 @@
             this.waitWhileSuspended();
         	
             if(myModel != null)
-            {
-            	this.overallStats();
+            {	
+            	for(int i = 0; i < myModel.getNumberOfServiceQueues(); i++)
+            	{
+            		myView.setServed(i, myModel.getServiceQueue()[i].getMyNumberCustomersServed());
+            	}
+            	
             	for(int i = 0; i < myModel.getNumberOfServiceQueues(); i++)
             	{
             		myView.setLines(i, myModel.getServiceQueue()[i].getMyNumberCustomersInLine());
@@ -104,7 +109,7 @@
             
             try
             {
-                Thread.sleep(500);
+                Thread.sleep(10);
             }
             catch(InterruptedException e)
             {
