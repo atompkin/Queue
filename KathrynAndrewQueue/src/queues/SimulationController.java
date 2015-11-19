@@ -30,14 +30,20 @@
  		myModel = null;
  	}
  	
+ 	public void overallStats()
+ 	{
+ 		myView.setWaitTime(myModel.totalWaitTime());
+		myView.setIdleTime(myModel.totalIdleTime());
+		myView.setServiceTime(myModel.totalServiceTime());
+ 	}
 	public void cashierStats(Integer i)
 	{
 		if(myModel.getNumberOfServiceQueues() > i)
 		{
-			myView.setCashier(i, myModel.getServiceQueue()[i].getMyNumberCustomersServed(), myModel.getServiceQueue()[i].getMyTotalServiceTime(), myModel.getServiceQueue()[i].getMyTotalIdleTime(), myModel.getServiceQueue()[i].getMyTotalWaitTime());
-			myView.setWaitTime(myModel.totalWaitTime());
- 			myView.setIdleTime(myModel.totalIdleTime());
- 			myView.setServiceTime(myModel.totalServiceTime());
+			myView.setCashier(i, myModel.getServiceQueue()[i].getMyNumberCustomersServed(), 
+					myModel.getServiceQueue()[i].getMyTotalServiceTime(), 
+					myModel.getServiceQueue()[i].getMyTotalIdleTime(), 
+					myModel.getServiceQueue()[i].getMyTotalWaitTime());
 		}	
 	}
  	
@@ -89,6 +95,7 @@
         	
             if(myModel != null)
             {
+            	this.overallStats();
             	for(int i = 0; i < myModel.getNumberOfServiceQueues(); i++)
             	{
             		myView.setLines(i, myModel.getServiceQueue()[i].getMyNumberCustomersInLine());
