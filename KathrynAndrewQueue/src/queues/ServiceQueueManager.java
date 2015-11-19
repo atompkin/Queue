@@ -20,7 +20,7 @@ public class ServiceQueueManager
 	private CustomerGenerator myCustomerGenerator;
 	private Cashier[] myCashiers;
 	
-	public ServiceQueueManager(int numberOfQueues, int maxTimeBetweenCustomers, int maxServiceTime, int numberOfCustomers)
+	public ServiceQueueManager(Integer numberOfQueues, Integer maxTimeBetweenCustomers, Integer maxServiceTime, Integer numberOfCustomers)
 	{
 		myNumberOfServiceQueues = numberOfQueues;
 		myServiceQueues = new ServiceQueue[myNumberOfServiceQueues];
@@ -110,5 +110,15 @@ public class ServiceQueueManager
 	public int getNumberOfServiceQueues()
 	{
 		return myNumberOfServiceQueues;
+	}
+	
+	public CustomerGenerator getCustomerGenerator()
+	{
+		return myCustomerGenerator;
+	}
+	
+	public Cashier[] getCashier()
+	{
+		return myCashiers;
 	}
 }

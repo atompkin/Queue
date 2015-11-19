@@ -75,6 +75,8 @@ public abstract class Cashier implements Runnable
         
         while(true)
         {
+        	this.waitWhileSuspended();
+        	 
         	if(!myServiceQueue.empty())
         	{
         		try

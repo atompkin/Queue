@@ -28,6 +28,9 @@
  	private JLabel myServiceTime;
  	private JLabel myIdleTime;
  	private JLabel myWaitTime;
+ 	private JLabel myAverageServiceTime;
+ 	private JLabel myAverageIdleTime;
+ 	private JLabel myAverageWaitTime;
  	private JLabel myCashierStats;
 	private JLabel myCashierWait;
 	private JLabel myCashierServed;
@@ -37,6 +40,15 @@
  	private ButtonListener mySuspendListener;
 	private ButtonListener[][] myLinesListener;
 	private ImageIcon myPicture;
+	
+	private JLabel myNumberOfCustomersLabel;
+	private JLabel myServiceTimeLabel;
+	private JLabel myTimeBetweenCustomersLabel;
+	private JLabel myNumberOfQueuesLabel;
+	private JComboBox<Integer> myNumberOfCustomersEntered;
+	private JComboBox<Integer> myServiceTimeEntered;
+	private JComboBox<Integer> myTimeBetweenCustomersEntered;
+	private JComboBox<Integer> myNumberOfQueuesEntered;
  	
  	/**
  	 * Constructor
@@ -53,20 +65,20 @@
  		
  		myPicture = new ImageIcon("src/images/Queen1.jpg");
  		
- 		myPanel = new JPanel(new GridLayout(3,1));
+ 		myPanel = new JPanel(new GridLayout(3,0));
  		myPanel.setSize(285,560);
  		myPanel.setLocation(600,0);
  		myPanel.setBackground(Color.black);
  		
- 		myPanel3 = new JPanel();
+ 		myPanel3 = new JPanel(new GridLayout(0,1));
  		myPanel3.setBackground(Color.white);
  		myPanel3.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Color.black));
  		
- 		myPanel5 = new JPanel();
+ 		myPanel5 = new JPanel(new GridLayout(0,1));
  		myPanel5.setBackground(Color.white);
  		myPanel5.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Color.black));
  		
- 		myPanel4 = new JPanel();
+ 		myPanel4 = new JPanel(new GridLayout(0,2));
  		myPanel4.setBackground(Color.white);
  		myPanel4.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Color.black));
  		
@@ -98,19 +110,25 @@
  			myLines[0][i].setText("Overflow: ");
  		}
  		
- 		mySuspend = new JButton("Pause");
+ 		mySuspend = new JButton("Start");
  		mySuspend.addMouseListener(mySuspendListener);
  		
  		myOverallStats = new JLabel("Overall Stats");
  		myOverallStats.setFont(new Font("TimesRoman", Font.BOLD, 20));
  		myCustomersServed = new JLabel("Total Customers Served: ");
- 		myCustomersServed.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+ 		myCustomersServed.setFont(new Font("TimesRoman", Font.PLAIN, 15));
  		myServiceTime = new JLabel("Total Service Time: ");
- 		myServiceTime.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+ 		myServiceTime.setFont(new Font("TimesRoman", Font.PLAIN, 15));
  		myWaitTime = new JLabel("Total Wait Time: ");
- 		myWaitTime.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+ 		myWaitTime.setFont(new Font("TimesRoman", Font.PLAIN, 15));
  		myIdleTime = new JLabel("Total Idle Time: ");
- 		myIdleTime.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+ 		myIdleTime.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+ 		myAverageServiceTime = new JLabel("Average Service Time: ");
+ 		myAverageServiceTime.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+ 		myAverageWaitTime = new JLabel("Average Wait Time: ");
+ 		myAverageWaitTime.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+ 		myAverageIdleTime = new JLabel("Average Idle Time: ");
+ 		myAverageIdleTime.setFont(new Font("TimesRoman", Font.PLAIN, 15));
  		
  		myCashierStats = new JLabel("Individual Cashier Stats");
  		myCashierStats.setFont(new Font("TimesRoman", Font.BOLD, 20));
@@ -123,6 +141,36 @@
 		myCashierIdle = new JLabel("");
 		myCashierIdle.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		
+		myNumberOfCustomersLabel = new JLabel("Number Of Customers:");
+		myNumberOfCustomersLabel.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+		myServiceTimeLabel = new JLabel("Service Time:");
+		myServiceTimeLabel.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+		myTimeBetweenCustomersLabel = new JLabel("Between Customers:");
+		myTimeBetweenCustomersLabel.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+		myNumberOfQueuesLabel = new JLabel("Number Of Queues:");
+		myNumberOfQueuesLabel.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+		
+		myNumberOfCustomersEntered = new JComboBox<Integer>();
+		for(int i = 1; i < 1000; i++)
+		{
+			myNumberOfCustomersEntered.addItem(i);
+		}
+		myServiceTimeEntered = new JComboBox<Integer>();
+		for(int i = 1; i < 1000; i++)
+		{
+			myServiceTimeEntered.addItem(i);
+		}
+		myTimeBetweenCustomersEntered = new JComboBox<Integer>();
+		for(int i = 1; i < 1000; i++)
+		{
+			myTimeBetweenCustomersEntered.addItem(i);
+		}
+		myNumberOfQueuesEntered  = new JComboBox<Integer>();
+		for(int i = 1; i < 6; i++)
+		{
+			myNumberOfQueuesEntered.addItem(i);
+		}
+		
 		myPanel.add(myPanel3);
 		myPanel.add(myPanel5);
 		myPanel.add(myPanel4);
@@ -131,17 +179,28 @@
 		myPanel3.add(myServiceTime);
 		myPanel3.add(myWaitTime);
 		myPanel3.add(myIdleTime);
+		myPanel3.add(myAverageServiceTime);
+		myPanel3.add(myAverageWaitTime);
+		myPanel3.add(myAverageIdleTime);
 		myPanel5.add(myCashierStats);
 		myPanel5.add(myCashierServed);
 		myPanel5.add(myCashierServeTime);
 		myPanel5.add(myCashierWait);
 		myPanel5.add(myCashierIdle);
+		myPanel4.add(myNumberOfCustomersLabel);
+		myPanel4.add(myNumberOfCustomersEntered);
+		myPanel4.add(myServiceTimeLabel);
+		myPanel4.add(myServiceTimeEntered);
+		myPanel4.add(myTimeBetweenCustomersLabel);
+		myPanel4.add(myTimeBetweenCustomersEntered);
+		myPanel4.add(myNumberOfQueuesLabel);
+		myPanel4.add(myNumberOfQueuesEntered);
 		myPanel4.add(mySuspend);
 		getContentPane().add(myPanel);
 		getContentPane().add(myPanel2);
 		
 		this.setVisible(true);
-	}
+ 	}
 
 	/**
 	 * The reflection part of the project where all the button listeners are
@@ -227,6 +286,11 @@
 		myLines[9][l].repaint();
 	}
 	
+	public void setButton(String text)
+	{
+		mySuspend.setText(text);
+	}
+	
 	public void setLines(int l, int size)
 	{
 		if(size < 9)
@@ -241,8 +305,7 @@
 		}
 		switch(size)
 		{
-			case 0: myLines[8][l].setIcon(null);
-					myLines[7][l].setIcon(null);
+			case 0: myLines[7][l].setIcon(null);
 					myLines[6][l].setIcon(null);
 					myLines[5][l].setIcon(null);
 					myLines[4][l].setIcon(null);
@@ -250,8 +313,7 @@
 					myLines[2][l].setIcon(null);
 					myLines[1][l].setIcon(null);
 					break;
-			case 1: myLines[8][l].setIcon(myPicture);
-					myLines[7][l].setIcon(null);
+			case 1: myLines[7][l].setIcon(null);
 					myLines[6][l].setIcon(null);
 					myLines[5][l].setIcon(null);
 					myLines[4][l].setIcon(null);
@@ -259,8 +321,7 @@
 					myLines[2][l].setIcon(null);
 					myLines[1][l].setIcon(null);
 					break;
-			case 2: myLines[8][l].setIcon(myPicture);
-					myLines[7][l].setIcon(myPicture);
+			case 2: myLines[7][l].setIcon(myPicture);
 					myLines[6][l].setIcon(null);
 					myLines[5][l].setIcon(null);
 					myLines[4][l].setIcon(null);
@@ -268,8 +329,7 @@
 					myLines[2][l].setIcon(null);
 					myLines[1][l].setIcon(null);
 					break;
-			case 3: myLines[8][l].setIcon(myPicture);
-					myLines[7][l].setIcon(myPicture);
+			case 3: myLines[7][l].setIcon(myPicture);
 					myLines[6][l].setIcon(myPicture);
 					myLines[5][l].setIcon(null);
 					myLines[4][l].setIcon(null);
@@ -277,8 +337,7 @@
 					myLines[2][l].setIcon(null);
 					myLines[1][l].setIcon(null);
 					break;
-			case 4: myLines[8][l].setIcon(myPicture);
-					myLines[7][l].setIcon(myPicture);
+			case 4: myLines[7][l].setIcon(myPicture);
 					myLines[6][l].setIcon(myPicture);
 					myLines[5][l].setIcon(myPicture);
 					myLines[4][l].setIcon(null);
@@ -286,8 +345,7 @@
 					myLines[2][l].setIcon(null);
 					myLines[1][l].setIcon(null);
 					break;
-			case 5: myLines[8][l].setIcon(myPicture);
-					myLines[7][l].setIcon(myPicture);
+			case 5: myLines[7][l].setIcon(myPicture);
 					myLines[6][l].setIcon(myPicture);
 					myLines[5][l].setIcon(myPicture);
 					myLines[4][l].setIcon(myPicture);
@@ -295,8 +353,7 @@
 					myLines[2][l].setIcon(null);
 					myLines[1][l].setIcon(null);
 					break;
-			case 6: myLines[8][l].setIcon(myPicture);
-					myLines[7][l].setIcon(myPicture);
+			case 6: myLines[7][l].setIcon(myPicture);
 					myLines[6][l].setIcon(myPicture);
 					myLines[5][l].setIcon(myPicture);
 					myLines[4][l].setIcon(myPicture);
@@ -304,8 +361,7 @@
 					myLines[2][l].setIcon(null);
 					myLines[1][l].setIcon(null);
 					break;	
-			case 7: myLines[8][l].setIcon(myPicture);
-					myLines[7][l].setIcon(myPicture);
+			case 7: myLines[7][l].setIcon(myPicture);
 					myLines[6][l].setIcon(myPicture);
 					myLines[5][l].setIcon(myPicture);
 					myLines[4][l].setIcon(myPicture);
@@ -313,8 +369,7 @@
 					myLines[2][l].setIcon(myPicture);
 					myLines[1][l].setIcon(null);
 					break;
-			case 8: myLines[8][l].setIcon(myPicture);
-					myLines[7][l].setIcon(myPicture);
+			case 8: myLines[7][l].setIcon(myPicture);
 					myLines[6][l].setIcon(myPicture);
 					myLines[5][l].setIcon(myPicture);
 					myLines[4][l].setIcon(myPicture);
@@ -322,8 +377,7 @@
 					myLines[2][l].setIcon(myPicture);
 					myLines[1][l].setIcon(myPicture);
 					break;	
-			default: myLines[8][l].setIcon(myPicture);
-					myLines[7][l].setIcon(myPicture);
+			default: myLines[7][l].setIcon(myPicture);
 					myLines[6][l].setIcon(myPicture);
 					myLines[5][l].setIcon(myPicture);
 					myLines[4][l].setIcon(myPicture);
@@ -332,6 +386,26 @@
 					myLines[1][l].setIcon(myPicture);
 					break;
 		}
+	}
+	
+	public Integer getMyNumberOfCustomersEntered() 
+	{
+		return myNumberOfCustomersEntered.getSelectedIndex() + 1;
+	}
+
+	public Integer getMyServiceTimeEntered() 
+	{
+		return myServiceTimeEntered.getSelectedIndex() + 1;
+	}
+
+	public Integer getMyTimeBetweenCustomersEntered() 
+	{
+		return myTimeBetweenCustomersEntered.getSelectedIndex() + 1;
+	}
+
+	public Integer getMyNumberOfQueuesEntered() 
+	{
+		return myNumberOfQueuesEntered.getSelectedIndex() + 1;
 	}
 	
 }
