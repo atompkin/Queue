@@ -20,7 +20,7 @@ public class ServiceQueueManager
 	private CustomerGenerator myCustomerGenerator;
 	private Cashier[] myCashiers;
 	
-	public ServiceQueueManager(Integer numberOfQueues, Integer maxTimeBetweenCustomers, Integer maxServiceTime, Integer numberOfCustomers)
+	public ServiceQueueManager(int numberOfQueues, int maxTimeBetweenCustomers, int maxServiceTime, int numberOfCustomers)
 	{
 		myNumberOfServiceQueues = numberOfQueues;
 		myServiceQueues = new ServiceQueue[myNumberOfServiceQueues];
@@ -29,7 +29,7 @@ public class ServiceQueueManager
 		{
 			myServiceQueues[i] = new ServiceQueue();
 			myCashiers[i] = new UniformCashier(maxServiceTime, myServiceQueues[i]);
-			myCashiers[i].start();
+			myCashiers[i].start();			
 		}
 		myTotalWaitTime = 0;
 		myTotalServiceTime = 0;
@@ -57,12 +57,20 @@ public class ServiceQueueManager
 	
 	public int totalServiceTime()
 	{
-		return 0;
+		for(int i = 0; i < getNumberOfServiceQueues(); i++)
+		{
+			myTotalServiceTime = myTotalServiceTime + myServiceQueues[i].getMyTotalServiceTime();
+		}
+		return myTotalServiceTime;
 	}
 	
 	public int totalIdleTime()
 	{
-		return 0;
+		for(int i = 0; i < getNumberOfServiceQueues(); i++)
+		{
+			myTotalIdleTime = myTotalIdleTime + myServiceQueues[i].getMyTotalIdleTime();
+		}
+		return myTotalIdleTime;
 	}
 	
 	public ServiceQueue determineShortestQueue()
@@ -93,12 +101,22 @@ public class ServiceQueueManager
 	
 	public int averageServiceTime()
 	{
-		return totalServiceTime()/totalServedSoFar();
+		int average = 0;
+		for(int i = 0; i < getNumberOfServiceQueues(); i++)
+		{
+			average = average + myServiceQueues[i].averageServiceTime();
+		}
+		return average/getNumberOfServiceQueues();
 	}
 	
 	public int averageIdleTime()
 	{
-		return totalIdleTime()/totalServedSoFar();
+		int average = 0;
+		for(int i = 0; i < getNumberOfServiceQueues(); i++)
+		{
+			average = average + myServiceQueues[i].averageIdleTime();
+		}
+		return average/getNumberOfServiceQueues();
 	}
 	
 	public ServiceQueue[] getServiceQueue()

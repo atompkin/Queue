@@ -18,6 +18,7 @@ public abstract class Cashier implements Runnable
 	private ServiceQueue myServiceQueue;
 	private Thread myThread;
     private boolean mySuspended;
+    private int myServiceTime;
 	
     /**
      * Constructor, which instantiates all of the properties
@@ -83,6 +84,7 @@ public abstract class Cashier implements Runnable
                 {
         			serveCustomer();
                     Thread.sleep(generateServiceTime());
+                    myServiceQueue.addToServiceTime(getTotalServiceTime());
                 }
                 catch(InterruptedException e)
                 {
@@ -95,6 +97,7 @@ public abstract class Cashier implements Runnable
         		try
                 {
                     Thread.sleep(10);
+                    myServiceQueue.addToIdleTime(10);
                 }
                 catch(InterruptedException e)
                 {
@@ -156,6 +159,16 @@ public abstract class Cashier implements Runnable
 	public int getMyMaxTimeOfService() 
 	{
 		return myMaxTimeOfService;
+	}
+
+	public void setTotalServiceTime(int i)
+	{
+		myServiceTime = i;
+	}
+	
+	public int getTotalServiceTime()
+	{
+		return myServiceTime;
 	}
 
 }

@@ -86,16 +86,28 @@ public class ServiceQueue extends Queue<Customer>
 	 */
 	public int averageWaitTime()
 	{
+		if(getMyNumberCustomersServed() == 0)
+		{
+			return 0;
+		}
 		return getMyTotalWaitTime()/myNumberCustomersServed;
 	}
 	
 	public int averageServiceTime()
 	{
+		if(getMyNumberCustomersServed() == 0)
+		{
+			return 0;
+		}
 		return getMyTotalServiceTime()/myNumberCustomersServed;
 	}
 	
 	public int averageIdleTime()
 	{
+		if(getMyNumberCustomersServed() == 0)
+		{
+			return getMyTotalIdleTime();
+		}
 		return getMyTotalIdleTime()/myNumberCustomersServed;
 	}
 

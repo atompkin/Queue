@@ -44,9 +44,9 @@
 	private JLabel myServiceTimeLabel;
 	private JLabel myTimeBetweenCustomersLabel;
 	private JLabel myNumberOfQueuesLabel;
-	private JComboBox<Integer> myNumberOfCustomersEntered;
-	private JComboBox<Integer> myServiceTimeEntered;
-	private JComboBox<Integer> myTimeBetweenCustomersEntered;
+	private JTextField myNumberOfCustomersEntered;
+	private JTextField myServiceTimeEntered;
+	private JTextField myTimeBetweenCustomersEntered;
 	private JComboBox<Integer> myNumberOfQueuesEntered;
  	
  	/**
@@ -96,7 +96,6 @@
  			for (int j = 0; j < 5; j++) 
  			{
  				myLines[i][j] = new JLabel();
- 				myLines[i][j].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.black));
 				myLines[i][j].addMouseListener(myLinesListener[i][j]);
  				myPanel2.add(myLines[i][j]);
  			}
@@ -133,15 +132,9 @@
 		myTimeBetweenCustomersLabel = new JLabel("Between Customers:");
 		myNumberOfQueuesLabel = new JLabel("Number Of Queues:");
 		
-		myNumberOfCustomersEntered = new JComboBox<Integer>();
-		myServiceTimeEntered = new JComboBox<Integer>();
-		myTimeBetweenCustomersEntered = new JComboBox<Integer>();
-		for(int i = 1; i < 1000; i++)
-		{
-			myNumberOfCustomersEntered.addItem(i);
-			myServiceTimeEntered.addItem(i);
-			myTimeBetweenCustomersEntered.addItem(i);
-		}
+		myNumberOfCustomersEntered = new JTextField();
+		myServiceTimeEntered = new JTextField();
+		myTimeBetweenCustomersEntered = new JTextField();
 		myNumberOfQueuesEntered  = new JComboBox<Integer>();
 		for(int i = 1; i < 6; i++)
 		{
@@ -246,9 +239,9 @@
  		myServiceTime.setText("Total Service Time: " + serviceTime);
  		myWaitTime.setText("Total Wait Time: " + waitTime);
  		myIdleTime.setText("Total Idle Time: " + idleTime);
- 		myAverageServiceTime.setText("Total Service Time: " + averageService);
- 		myAverageWaitTime.setText("Total Wait Time: " + averageWait);
- 		myAverageIdleTime.setText("Total Idle Time: " + averageIdle);
+ 		myAverageServiceTime.setText("Average Service Time: " + averageService);
+ 		myAverageWaitTime.setText("Average Wait Time: " + averageWait);
+ 		myAverageIdleTime.setText("Average Idle Time: " + averageIdle);
 	}
 	
 	public void setCashier(int cashier, int served, int serviceTime, int idleTime, int waitTime)
@@ -368,19 +361,34 @@
 		}
 	}
 	
-	public Integer getMyNumberOfCustomersEntered() 
+	public int getMyNumberOfCustomersEntered() 
 	{
-		return myNumberOfCustomersEntered.getSelectedIndex() + 1;
+		String input = myNumberOfCustomersEntered.getText();
+		if(input.matches("^[0-9]*$"))
+		{
+			return Integer.parseInt(input);
+		}
+		return 0;
 	}
 
-	public Integer getMyServiceTimeEntered() 
+	public int getMyServiceTimeEntered() 
 	{
-		return myServiceTimeEntered.getSelectedIndex() + 1;
+		String input = myServiceTimeEntered.getText();
+		if(input.matches("^[0-9]*$"))
+		{
+			return Integer.parseInt(input);
+		}
+		return 0;
 	}
 
-	public Integer getMyTimeBetweenCustomersEntered() 
+	public int getMyTimeBetweenCustomersEntered() 
 	{
-		return myTimeBetweenCustomersEntered.getSelectedIndex() + 1;
+		String input = myTimeBetweenCustomersEntered.getText();
+		if(input.matches("^[0-9]*$"))
+		{
+			return Integer.parseInt(input);
+		}
+		return 0;
 	}
 
 	public Integer getMyNumberOfQueuesEntered() 

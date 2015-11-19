@@ -32,17 +32,26 @@
  	
 	public void cashierStats(Integer i)
 	{
+		int counter = 0;
 		if(myModel != null)
 		{
 			if(myModel.getNumberOfServiceQueues() > i)
 			{
 				myView.setCashier(i, myModel.getServiceQueue()[i].getMyNumberCustomersServed(), 
-					myModel.getServiceQueue()[i].getMyTotalServiceTime(), 
-					myModel.getServiceQueue()[i].getMyTotalIdleTime(), 
-					myModel.getServiceQueue()[i].getMyTotalWaitTime());
+					myModel.getServiceQueue()[i].averageServiceTime(), 
+					myModel.getServiceQueue()[i].averageIdleTime(), 
+					myModel.getServiceQueue()[i].averageWaitTime());
+			}
+			if(counter == 0)
+			{
+				for(int j = 0; j < myModel.getNumberOfServiceQueues(); j++)
+	 			{
+	 				myModel.getCashier()[j].suspend();
+	 			}
 				myView.setOverallStats(myModel.totalServedSoFar(), myModel.totalServiceTime(),
 					myModel.totalIdleTime(), myModel.totalWaitTime(), myModel.averageServiceTime(),
 					myModel.averageIdleTime(), myModel.averageWaitTime());
+				counter++;
 			}
 		}
 	}
@@ -52,7 +61,8 @@
  		if(myModel == null)
  		{
  			myModel = new ServiceQueueManager(myView.getMyNumberOfQueuesEntered(),
- 					(Integer)myView.getMyTimeBetweenCustomersEntered(), (Integer)myView.getMyServiceTimeEntered(),
+ 					(Integer)myView.getMyTimeBetweenCustomersEntered(), 
+ 					(Integer)myView.getMyServiceTimeEntered(),
  					(Integer)myView.getMyNumberOfCustomersEntered());
  			this.start();
  			myView.setButton("Pause");

@@ -15,6 +15,7 @@ public class UniformCashier extends Cashier
 {	
 	private Random myRandom;
 	private int myMaxServiceTime;
+	private int myServiceTime;
 	
 	public UniformCashier(int maxServiceTime, ServiceQueue serviceQueue) 
 	{
@@ -25,9 +26,11 @@ public class UniformCashier extends Cashier
 	
 	public int generateServiceTime()
 	{
-		return myRandom.nextInt(getMyMaxServiceTime());
+		myServiceTime = myRandom.nextInt(getMyMaxServiceTime());
+		this.setTotalServiceTime(myServiceTime);
+		return myServiceTime;
 	}
-
+	
 	public void setMyMaxServiceTime(int maxServiceTime) 
 	{
 		myMaxServiceTime = maxServiceTime;
