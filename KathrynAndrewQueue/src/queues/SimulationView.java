@@ -39,7 +39,8 @@
  	private JButton mySuspend;
  	private ButtonListener mySuspendListener;
 	private ButtonListener[][] myLinesListener;
-	private ImageIcon myPicture;
+	private ImageIcon myBear;
+	private ImageIcon myHoney;
 	private JLabel myNumberOfCustomersLabel;
 	private JLabel myServiceTimeLabel;
 	private JLabel myTimeBetweenCustomersLabel;
@@ -65,7 +66,8 @@
  		this.associateListeners(controller);
  		getContentPane().setBackground(Color.white);
  		
- 		myPicture = new ImageIcon("src/images/Queen1.jpg");
+ 		myBear = new ImageIcon("src/images/Bear.gif");
+ 		myHoney = new ImageIcon("src/images/Honey.png");
  		
  		myPanel = new JPanel(new GridLayout(3,0));
  		myPanel.setSize(285,560);
@@ -87,7 +89,7 @@
  		myPanel2 = new JPanel(new GridLayout(10,5));
  		myPanel2.setSize(600,560);
  		myPanel2.setLocation(0,0);
- 		myPanel2.setBackground(Color.cyan);
+ 		myPanel2.setBackground(Color.green);
  		myPanel2.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Color.black));
  		
  		myLines = new JLabel[10][5];
@@ -104,10 +106,7 @@
  		for(int i = 0; i < 5; i++)
  		{
  			myLines[9][i].setText("Served: ");
- 		}
- 		
- 		for(int i = 0; i < 5; i++)
- 		{
+ 			myLines[8][i].setIcon(myHoney);
  			myLines[0][i].setText("Overflow: ");
  		}
  		
@@ -294,7 +293,7 @@
 					myLines[2][l].setIcon(null);
 					myLines[1][l].setIcon(null);
 					break;
-			case 2: myLines[7][l].setIcon(myPicture);
+			case 2: myLines[7][l].setIcon(myBear);
 					myLines[6][l].setIcon(null);
 					myLines[5][l].setIcon(null);
 					myLines[4][l].setIcon(null);
@@ -302,61 +301,61 @@
 					myLines[2][l].setIcon(null);
 					myLines[1][l].setIcon(null);
 					break;
-			case 3: myLines[7][l].setIcon(myPicture);
-					myLines[6][l].setIcon(myPicture);
+			case 3: myLines[7][l].setIcon(myBear);
+					myLines[6][l].setIcon(myBear);
 					myLines[5][l].setIcon(null);
 					myLines[4][l].setIcon(null);
 					myLines[3][l].setIcon(null);
 					myLines[2][l].setIcon(null);
 					myLines[1][l].setIcon(null);
 					break;
-			case 4: myLines[7][l].setIcon(myPicture);
-					myLines[6][l].setIcon(myPicture);
-					myLines[5][l].setIcon(myPicture);
+			case 4: myLines[7][l].setIcon(myBear);
+					myLines[6][l].setIcon(myBear);
+					myLines[5][l].setIcon(myBear);
 					myLines[4][l].setIcon(null);
 					myLines[3][l].setIcon(null);
 					myLines[2][l].setIcon(null);
 					myLines[1][l].setIcon(null);
 					break;
-			case 5: myLines[7][l].setIcon(myPicture);
-					myLines[6][l].setIcon(myPicture);
-					myLines[5][l].setIcon(myPicture);
-					myLines[4][l].setIcon(myPicture);
+			case 5: myLines[7][l].setIcon(myBear);
+					myLines[6][l].setIcon(myBear);
+					myLines[5][l].setIcon(myBear);
+					myLines[4][l].setIcon(myBear);
 					myLines[3][l].setIcon(null);
 					myLines[2][l].setIcon(null);
 					myLines[1][l].setIcon(null);
 					break;
-			case 6: myLines[7][l].setIcon(myPicture);
-					myLines[6][l].setIcon(myPicture);
-					myLines[5][l].setIcon(myPicture);
-					myLines[4][l].setIcon(myPicture);
-					myLines[3][l].setIcon(myPicture);
+			case 6: myLines[7][l].setIcon(myBear);
+					myLines[6][l].setIcon(myBear);
+					myLines[5][l].setIcon(myBear);
+					myLines[4][l].setIcon(myBear);
+					myLines[3][l].setIcon(myBear);
 					myLines[2][l].setIcon(null);
 					myLines[1][l].setIcon(null);
 					break;	
-			case 7: myLines[7][l].setIcon(myPicture);
-					myLines[6][l].setIcon(myPicture);
-					myLines[5][l].setIcon(myPicture);
-					myLines[4][l].setIcon(myPicture);
-					myLines[3][l].setIcon(myPicture);
-					myLines[2][l].setIcon(myPicture);
+			case 7: myLines[7][l].setIcon(myBear);
+					myLines[6][l].setIcon(myBear);
+					myLines[5][l].setIcon(myBear);
+					myLines[4][l].setIcon(myBear);
+					myLines[3][l].setIcon(myBear);
+					myLines[2][l].setIcon(myBear);
 					myLines[1][l].setIcon(null);
 					break;
-			case 8: myLines[7][l].setIcon(myPicture);
-					myLines[6][l].setIcon(myPicture);
-					myLines[5][l].setIcon(myPicture);
-					myLines[4][l].setIcon(myPicture);
-					myLines[3][l].setIcon(myPicture);
-					myLines[2][l].setIcon(myPicture);
-					myLines[1][l].setIcon(myPicture);
+			case 8: myLines[7][l].setIcon(myBear);
+					myLines[6][l].setIcon(myBear);
+					myLines[5][l].setIcon(myBear);
+					myLines[4][l].setIcon(myBear);
+					myLines[3][l].setIcon(myBear);
+					myLines[2][l].setIcon(myBear);
+					myLines[1][l].setIcon(myBear);
 					break;	
-			default: myLines[7][l].setIcon(myPicture);
-					myLines[6][l].setIcon(myPicture);
-					myLines[5][l].setIcon(myPicture);
-					myLines[4][l].setIcon(myPicture);
-					myLines[3][l].setIcon(myPicture);
-					myLines[2][l].setIcon(myPicture);
-					myLines[1][l].setIcon(myPicture);
+			default: myLines[7][l].setIcon(myBear);
+					myLines[6][l].setIcon(myBear);
+					myLines[5][l].setIcon(myBear);
+					myLines[4][l].setIcon(myBear);
+					myLines[3][l].setIcon(myBear);
+					myLines[2][l].setIcon(myBear);
+					myLines[1][l].setIcon(myBear);
 					break;
 		}
 	}
