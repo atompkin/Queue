@@ -40,7 +40,6 @@
  	private ButtonListener mySuspendListener;
 	private ButtonListener[][] myLinesListener;
 	private ImageIcon myPicture;
-	
 	private JLabel myNumberOfCustomersLabel;
 	private JLabel myServiceTimeLabel;
 	private JLabel myTimeBetweenCustomersLabel;
@@ -56,6 +55,9 @@
  	 */
  	public SimulationView(SimulationController controller)
  	{
+ 		Font labelFont = new Font("Times New Roman" , Font.PLAIN, 14);
+ 		UIManager.put("Label.font", labelFont);
+ 		
  		this.setSize(900, 600);
  		this.setLayout(null);
  		this.setTitle("Queue");
@@ -114,55 +116,30 @@
  		mySuspend.addMouseListener(mySuspendListener);
  		
  		myOverallStats = new JLabel("Overall Stats");
- 		myOverallStats.setFont(new Font("TimesRoman", Font.BOLD, 20));
  		myCustomersServed = new JLabel("Total Customers Served: ");
- 		myCustomersServed.setFont(new Font("TimesRoman", Font.PLAIN, 15));
  		myServiceTime = new JLabel("Total Service Time: ");
- 		myServiceTime.setFont(new Font("TimesRoman", Font.PLAIN, 15));
  		myWaitTime = new JLabel("Total Wait Time: ");
- 		myWaitTime.setFont(new Font("TimesRoman", Font.PLAIN, 15));
  		myIdleTime = new JLabel("Total Idle Time: ");
- 		myIdleTime.setFont(new Font("TimesRoman", Font.PLAIN, 15));
  		myAverageServiceTime = new JLabel("Average Service Time: ");
- 		myAverageServiceTime.setFont(new Font("TimesRoman", Font.PLAIN, 15));
  		myAverageWaitTime = new JLabel("Average Wait Time: ");
- 		myAverageWaitTime.setFont(new Font("TimesRoman", Font.PLAIN, 15));
  		myAverageIdleTime = new JLabel("Average Idle Time: ");
- 		myAverageIdleTime.setFont(new Font("TimesRoman", Font.PLAIN, 15));
- 		
  		myCashierStats = new JLabel("Individual Cashier Stats");
- 		myCashierStats.setFont(new Font("TimesRoman", Font.BOLD, 20));
 		myCashierWait = new JLabel("");
-		myCashierWait.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		myCashierServed = new JLabel("");
-		myCashierServed.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		myCashierServeTime = new JLabel("");
-		myCashierServeTime.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		myCashierIdle = new JLabel("");
-		myCashierIdle.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-		
 		myNumberOfCustomersLabel = new JLabel("Number Of Customers:");
-		myNumberOfCustomersLabel.setFont(new Font("TimesRoman", Font.PLAIN, 14));
 		myServiceTimeLabel = new JLabel("Service Time:");
-		myServiceTimeLabel.setFont(new Font("TimesRoman", Font.PLAIN, 14));
 		myTimeBetweenCustomersLabel = new JLabel("Between Customers:");
-		myTimeBetweenCustomersLabel.setFont(new Font("TimesRoman", Font.PLAIN, 14));
 		myNumberOfQueuesLabel = new JLabel("Number Of Queues:");
-		myNumberOfQueuesLabel.setFont(new Font("TimesRoman", Font.PLAIN, 14));
 		
 		myNumberOfCustomersEntered = new JComboBox<Integer>();
-		for(int i = 1; i < 1000; i++)
-		{
-			myNumberOfCustomersEntered.addItem(i);
-		}
 		myServiceTimeEntered = new JComboBox<Integer>();
-		for(int i = 1; i < 1000; i++)
-		{
-			myServiceTimeEntered.addItem(i);
-		}
 		myTimeBetweenCustomersEntered = new JComboBox<Integer>();
 		for(int i = 1; i < 1000; i++)
 		{
+			myNumberOfCustomersEntered.addItem(i);
+			myServiceTimeEntered.addItem(i);
 			myTimeBetweenCustomersEntered.addItem(i);
 		}
 		myNumberOfQueuesEntered  = new JComboBox<Integer>();
@@ -196,9 +173,9 @@
 		myPanel4.add(myNumberOfQueuesLabel);
 		myPanel4.add(myNumberOfQueuesEntered);
 		myPanel4.add(mySuspend);
+		
 		getContentPane().add(myPanel);
 		getContentPane().add(myPanel2);
-		
 		this.setVisible(true);
  	}
 
@@ -410,5 +387,4 @@
 	{
 		return myNumberOfQueuesEntered.getSelectedIndex() + 1;
 	}
-	
 }

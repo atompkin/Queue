@@ -83,7 +83,6 @@ public class ServiceQueueManager
 				compare = compare2;
 			}
 		}
-		System.out.println(shortestQueue);
 		return myServiceQueues[shortestQueue];
 	}
 	
