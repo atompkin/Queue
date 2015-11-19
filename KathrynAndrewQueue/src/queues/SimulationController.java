@@ -30,13 +30,6 @@
  		myModel = null;
  	}
  	
- 	public void overallStats()
- 	{
- 		myView.setWaitTime(myModel.totalWaitTime());
-		myView.setIdleTime(myModel.totalIdleTime());
-		myView.setServiceTime(myModel.totalServiceTime());
- 	}
- 	
 	public void cashierStats(Integer i)
 	{
 		if(myModel.getNumberOfServiceQueues() > i)
@@ -45,6 +38,8 @@
 					myModel.getServiceQueue()[i].getMyTotalServiceTime(), 
 					myModel.getServiceQueue()[i].getMyTotalIdleTime(), 
 					myModel.getServiceQueue()[i].getMyTotalWaitTime());
+			myView.setOverallStats(myModel.totalServedSoFar(), myModel.totalServiceTime(),
+					myModel.totalIdleTime(), myModel.totalWaitTime());
 		}	
 	}
  	

@@ -42,34 +42,27 @@ public class ServiceQueueManager
 	
 	public int totalServedSoFar()
 	{
-		return 0;
+		int totalserved = 0;
+		for(int i = 0; i < myNumberOfServiceQueues; i++)
+		{
+			 totalserved = totalserved + myServiceQueues[i].getMyNumberCustomersServed();
+		}
+		return totalserved;
 	}
 	
 	public int totalWaitTime()
 	{
-		for(int i = 0; i <= myNumberOfServiceQueues; i++)
-		{
-			myTotalWaitTime = myTotalWaitTime + myServiceQueues[i].averageWaitTime();
-		}
-		return myTotalWaitTime;
+		return 0;
 	}
 	
 	public int totalServiceTime()
 	{
-		for(int i = 0; i <= myNumberOfServiceQueues; i++)
-		{
-			myTotalServiceTime = myTotalServiceTime + myServiceQueues[i].averageServiceTime();
-		}
-		return myTotalServiceTime;
+		return 0;
 	}
 	
 	public int totalIdleTime()
 	{
-		for(int i = 0; i <= myNumberOfServiceQueues; i++)
-		{
-			myTotalIdleTime = myTotalIdleTime + myServiceQueues[i].averageIdleTime();
-		}
-		return myTotalIdleTime;
+		return 0;
 	}
 	
 	public ServiceQueue determineShortestQueue()
@@ -117,22 +110,5 @@ public class ServiceQueueManager
 	public int getNumberOfServiceQueues()
 	{
 		return myNumberOfServiceQueues;
-	}
-	
-	public boolean isThreadDone()
-	{
-		int counter = 0;
-		for(int i = 0; i < myNumberOfServiceQueues; i++)
-		{
-			if(myServiceQueues[i].empty())
-			{
-				counter++;
-			}
-		}
-		if(counter == myNumberOfServiceQueues)
-		{
-			return true;
-		}
-		return false;
 	}
 }

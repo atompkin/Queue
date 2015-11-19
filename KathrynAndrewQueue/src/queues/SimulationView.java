@@ -204,25 +204,15 @@
         mySuspendListener = new ButtonListener(controller, suspend);
  	}
 	
-	public void setWaitTime(int i)
+	public void setOverallStats(int served, int serviceTime, int idleTime, int waitTime)
 	{
-		myWaitTime.setText("Total Wait Time: " + i);
-		myWaitTime.repaint();
+ 		myCustomersServed.setText("Total Customers Served: " + served);
+ 		myServiceTime.setText("Total Service Time: " + serviceTime);
+ 		myWaitTime.setText("Total Wait Time: " + waitTime);
+ 		myIdleTime.setText("Total Idle Time: " + idleTime);
 	}
 	
-	public void setIdleTime(int i)
-	{
-		myIdleTime.setText("Total Idle Time: " + i);
-		myIdleTime.repaint();
-	}
-	
-	public void setServiceTime(int i)
-	{
-		myServiceTime.setText("Total Service Time: " + i);
-		myServiceTime.repaint();
-	}
-	
-	public void setCashier(int cashier,int served,int serviceTime,int idleTime, int waitTime)
+	public void setCashier(int cashier, int served, int serviceTime, int idleTime, int waitTime)
 	{
 		myCashierStats.setText("Individual Cashier "+ (cashier + 1) + " Stats");
 		myCashierServed.setText("Total Served: "+ served);
