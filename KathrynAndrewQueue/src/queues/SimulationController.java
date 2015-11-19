@@ -41,7 +41,8 @@
 					myModel.getServiceQueue()[i].getMyTotalIdleTime(), 
 					myModel.getServiceQueue()[i].getMyTotalWaitTime());
 				myView.setOverallStats(myModel.totalServedSoFar(), myModel.totalServiceTime(),
-					myModel.totalIdleTime(), myModel.totalWaitTime());
+					myModel.totalIdleTime(), myModel.totalWaitTime(), myModel.averageServiceTime(),
+					myModel.averageIdleTime(), myModel.averageWaitTime());
 			}
 		}
 	}
